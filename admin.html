@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>管理后台 · VoteZone 2000</title>
+<link rel="stylesheet" href="https://unpkg.com/98.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="page-wrap">
+
+  <div class="site-banner">
+    <div class="site-banner__inner">
+      <h1>★ VoteZone 2000 ★ 管理后台</h1>
+      <p><a href="index.html">← 返回首页</a></p>
+    </div>
+  </div>
+
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">🗔 VoteZone.exe - 管理后台</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="toolbar" id="toolbar"><span>正在校验管理员权限...</span></div>
+  </div>
+
+  <div id="admin-guard-msg" class="info-box" style="display:none;"></div>
+
+  <div id="admin-area" style="display:none;">
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text" id="form-title-bar">➕ 创建新投票</div>
+      </div>
+      <div class="window-body">
+        <div id="form-error" class="error-box" style="display:none;"></div>
+        <div id="form-success" class="success-box" style="display:none;"></div>
+
+        <form id="poll-form">
+          <input type="hidden" id="editing-poll-id" value="" />
+
+          <div class="field-row-stacked">
+            <label for="f-title">投票标题</label>
+            <input id="f-title" type="text" required maxlength="100" />
+          </div>
+          <div class="field-row-stacked">
+            <label for="f-desc">简介</label>
+            <textarea id="f-desc" rows="3" maxlength="500"></textarea>
+          </div>
+          <div class="field-row-stacked">
+            <label for="f-start">开始时间</label>
+            <input id="f-start" type="datetime-local" required />
+          </div>
+          <div class="field-row-stacked">
+            <label for="f-end">结束时间</label>
+            <input id="f-end" type="datetime-local" required />
+          </div>
+
+          <fieldset class="mt8">
+            <legend>选项设置</legend>
+            <div class="field-row">
+              <input type="checkbox" id="f-allow-multi" />
+              <label for="f-allow-multi">允许多选</label>
+            </div>
+            <div class="field-row">
+              <input type="checkbox" id="f-show-results" />
+              <label for="f-show-results">结束前也显示结果</label>
+            </div>
+            <div class="field-row">
+              <input type="checkbox" id="f-randomize" />
+              <label for="f-randomize">随机排列选项</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="mt8">
+            <legend>投票选项（至少 2 个）</legend>
+            <div id="options-editor"></div>
+            <button type="button" id="btn-add-option">+ 添加选项</button>
+          </fieldset>
+
+          <div class="mt12">
+            <button type="submit" id="poll-form-submit">创建投票</button>
+            <button type="button" id="btn-cancel-edit" style="display:none;">取消编辑</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">📋 投票管理列表</div>
+      </div>
+      <div class="window-body">
+        <button type="button" id="btn-refresh-list" class="mb8">🔄 刷新列表</button>
+        <div id="admin-list-msg" class="info-box">正在读取投票列表...</div>
+        <table class="admin-table" id="admin-poll-table" style="display:none;">
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>标题</th>
+              <th>状态</th>
+              <th>发布</th>
+              <th>关闭</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="admin-poll-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="status-bar">
+    <p class="status-bar-field">状态：管理模式</p>
+    <p class="status-bar-field">VoteZone 2000 管理后台</p>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>★ 投票站 · VoteZone 2000 ★</title>
+<link rel="stylesheet" href="https://unpkg.com/98.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="page-wrap">
+
+  <div class="site-banner">
+    <div class="site-banner__inner">
+      <h1>★ VoteZone 2000 ★</h1>
+      <p>欢迎光临本站投票专区！<span class="blink">最佳浏览效果：任意分辨率 &amp; 现代浏览器</span></p>
+    </div>
+  </div>
+
+  <div class="marquee"><span>*** 欢迎使用 VoteZone 投票站 *** 登录后即可参与投票 *** 管理员可在后台创建全新投票 *** 请文明投票，感谢支持 ***</span></div>
+
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">🗔 VoteZone.exe - 首页</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="toolbar" id="toolbar">
+      <span>正在加载登录状态...</span>
+    </div>
+    <div class="window-body">
+      <p>这里是一个使用经典千禧年网页风格制作的在线投票系统。登录或注册账号后，即可参与下方公开的投票项目。</p>
+      <p class="center">
+        <span class="hit-counter" id="hit-counter">000000</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">🗳 当前公开投票列表</div>
+    </div>
+    <div class="window-body">
+      <div id="poll-list-msg" class="info-box">正在读取投票列表...</div>
+      <table class="poll-list" id="poll-list-table" style="display:none;">
+        <thead>
+          <tr>
+            <th>投票标题</th>
+            <th>状态</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="poll-list-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="status-bar">
+    <p class="status-bar-field">状态：就绪</p>
+    <p class="status-bar-field">VoteZone 2000 &copy; 本站使用 Supabase 提供数据服务</p>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

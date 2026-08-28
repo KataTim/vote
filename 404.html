@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>正在跳转... · VoteZone 2000</title>
+<link rel="stylesheet" href="https://unpkg.com/98.css" />
+<script>
+  // GitHub Pages 是纯静态托管，访问 /vote/2937739 这种路径时
+  // 服务器上并没有对应文件，会返回本 404.html。
+  // 这里用 JS 把路径里的编号取出来，跳转到 vote.html?id=编号。
+  // 这样既能让 /vote/2937739 这种"好看"的链接可以直接分享打开，
+  // 也不需要任何服务器端的动态路由支持。
+  (function () {
+    var path = window.location.pathname;
+    var match = path.match(/\/vote\/(\d+)\/?$/);
+
+    if (match) {
+      var id = match[1];
+      var base = path.slice(0, path.indexOf("/vote/"));
+      var target = base + "/vote.html?id=" + encodeURIComponent(id) + window.location.search + window.location.hash;
+      document.getElementById("fallback-link") && (document.getElementById("fallback-link").href = target);
+      window.location.replace(target);
+      return;
+    }
+
+    // 无法识别的路径：回到首页
+    var segments = path.split("/");
+    segments.pop();
+    var base2 = segments.join("/") || "";
+    var home = base2 + "/index.html";
+    document.getElementById("fallback-link") && (document.getElementById("fallback-link").href = home);
+    window.location.replace(home);
+  })();
+</script>
+</head>
+<body style="font-family: Tahoma, Verdana, sans-serif; padding: 16px;">
+  <div class="window" style="max-width: 420px; margin: 40px auto;">
+    <div class="title-bar">
+      <div class="title-bar-text">🔀 正在跳转...</div>
+    </div>
+    <div class="window-body">
+      <p>正在为您跳转到目标页面。</p>
+      <p>如果没有自动跳转，请点击：<a id="fallback-link" href="index.html">返回首页</a></p>
+      <noscript>
+        <div class="error-box" style="border:2px solid #cc0000; padding:6px; color:#cc0000;">
+          本站需要启用 JavaScript 才能正常访问，请开启浏览器 JavaScript 后重试。
+        </div>
+      </noscript>
+    </div>
+  </div>
+</body>
+</html>

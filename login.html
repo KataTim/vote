@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>登录 · VoteZone 2000</title>
+<link rel="stylesheet" href="https://unpkg.com/98.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="page-wrap">
+
+  <div class="site-banner">
+    <div class="site-banner__inner">
+      <h1>★ VoteZone 2000 ★</h1>
+      <p><a href="index.html">← 返回首页</a></p>
+    </div>
+  </div>
+
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">🗔 VoteZone.exe - 首页</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="toolbar" id="toolbar"><span>正在加载登录状态...</span></div>
+  </div>
+
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">🔑 用户登录</div>
+    </div>
+    <div class="window-body">
+      <div id="already-logged-in" class="info-box" style="display:none;">
+        您已经登录了，<a href="index.html">点此返回首页</a>。
+      </div>
+
+      <form id="login-form">
+        <div class="field-row-stacked">
+          <label for="login-email">邮箱</label>
+          <input id="login-email" type="email" required autocomplete="email" />
+        </div>
+        <div class="field-row-stacked">
+          <label for="login-password">密码</label>
+          <input id="login-password" type="password" required autocomplete="current-password" />
+        </div>
+
+        <div id="login-error" class="error-box" style="display:none;"></div>
+
+        <div class="mt12">
+          <button type="submit" id="login-submit">登 录</button>
+        </div>
+      </form>
+
+      <p class="mt12" style="font-size:12px;">还没有账号？<a href="register.html">立即注册</a></p>
+    </div>
+  </div>
+
+  <footer class="status-bar">
+    <p class="status-bar-field">状态：等待登录</p>
+    <p class="status-bar-field">VoteZone 2000</p>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
