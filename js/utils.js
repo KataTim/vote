@@ -157,11 +157,12 @@
   }
 
   const VERIFICATION_STATUS_MAP = {
-    unverified: { label: "未验证", cls: "badge--draft" },
-    pending: { label: "审核中", cls: "badge--upcoming" },
-    verified: { label: "已验证", cls: "badge--live" },
-    rejected: { label: "被拒绝", cls: "badge--ended" },
-  };
+  unverified: { label: "未验证", cls: "badge--draft" },
+  pending: { label: "审核中", cls: "badge--upcoming" },
+  verified: { label: "已验证", cls: "badge--live" },
+  rejected: { label: "被拒绝", cls: "badge--ended" },
+  needs_more_info: { label: "需要补充资料", cls: "badge--upcoming" },
+};
   function verificationStatusInfo(status) {
     return VERIFICATION_STATUS_MAP[status] || VERIFICATION_STATUS_MAP.unverified;
   }
