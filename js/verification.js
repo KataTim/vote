@@ -201,17 +201,41 @@
     const status = currentProfile.verification_status;
 
     if (status === "pending") {
-      blockedEl.style.display = "";
-      blockedEl.textContent = "您的身份验证申请正在审核中，请耐心等待管理员处理。";
-      contentEl.style.display = "none";
-      return;
-    }
-    if (status === "verified") {
-      blockedEl.style.display = "";
-      blockedEl.textContent = "您已经通过身份验证，无需重复申请。";
-      contentEl.style.display = "none";
-      return;
-    }
+  blockedEl.style.display = "";
+  blockedEl.textContent =
+    "您的身份验证申请正在审核中，请耐心等待管理员处理。";
+  contentEl.style.display = "none";
+  return;
+}
+
+
+if (status === "verified") {
+  blockedEl.style.display = "";
+  blockedEl.textContent =
+    "您已经通过身份验证，无需重复申请。";
+  contentEl.style.display = "none";
+  return;
+}
+
+
+if (status === "rejected") {
+  blockedEl.style.display = "";
+  blockedEl.textContent =
+    "您的身份验证申请已被拒绝，请查看管理员留言后重新提交。";
+  contentEl.style.display = "";
+  setStep(1);
+  return;
+}
+
+
+if (status === "needs_more_info") {
+  blockedEl.style.display = "";
+  blockedEl.textContent =
+    "管理员要求补充资料，请修改资料后重新提交申请。";
+  contentEl.style.display = "";
+  setStep(1);
+  return;
+}
 
     blockedEl.style.display = "none";
     contentEl.style.display = "";
