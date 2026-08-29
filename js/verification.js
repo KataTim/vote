@@ -434,5 +434,21 @@ if (status === "needs_more_info") {
     document.getElementById("submit-request-btn").addEventListener("click", handleSubmitRequest);
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", () => {
+  // 原来的初始化代码
+});
+
+
+setInterval(async () => {
+  if (!currentUser) return;
+
+  const fresh = await fetchFullProfile(currentUser.id);
+
+  if (fresh) {
+    currentProfile = fresh;
+    renderStatusArea(fresh);
+    refreshWizardVisibility();
+  }
+}, 10000);
+
 })();
