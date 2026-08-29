@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>用户管理 · VoteZone 2000 安全终端</title>
+<link rel="stylesheet" href="https://unpkg.com/98.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/verification.css" />
+</head>
+<body>
+<div class="page-wrap terminal-theme">
+
+  <div class="site-banner">
+    <div class="site-banner__inner">
+      <h1>&gt;_ ADMIN SECURITY TERMINAL</h1>
+      <p><a href="admin.html">← 返回投票管理</a> &nbsp;|&nbsp; <a href="index.html">首页</a></p>
+    </div>
+  </div>
+
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">🗔 VoteZone.exe - 用户管理</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="toolbar" id="toolbar"><span>正在校验管理员权限...</span></div>
+  </div>
+
+  <div id="admin-area" style="display:none;">
+
+    <!-- ============ 待审核申请 ============ -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">🛡 身份验证申请</div>
+      </div>
+      <div class="window-body">
+        <button type="button" id="btn-refresh-requests" class="mb8">🔄 刷新</button>
+        <label style="font-size:12px;">
+          <input type="checkbox" id="filter-pending-only" checked />
+          只看待审核 (pending)
+        </label>
+
+        <div id="requests-msg" class="info-box mt8">正在读取申请列表...</div>
+        <table class="admin-table mt8" id="requests-table" style="display:none;">
+          <thead>
+            <tr>
+              <th>用户</th>
+              <th>风险等级</th>
+              <th>提交时间</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="requests-body"></tbody>
+        </table>
+
+        <div id="request-detail" class="sunken-panel mt12" style="padding:8px; display:none;">
+          <h3 id="detail-title" style="margin-top:0;">申请详情</h3>
+          <div id="detail-content" style="font-size:12px;"></div>
+
+          <div class="mt12">
+            <label for="review-note-input">审核备注（驳回 / 要求补充资料时建议填写原因）</label><br/>
+            <textarea id="review-note-input" rows="2" style="width:100%; max-width:400px;"></textarea>
+          </div>
+
+          <div id="review-error" class="error-box mt8" style="display:none;"></div>
+          <div id="review-success" class="success-box mt8" style="display:none;"></div>
+
+          <div class="mt8">
+            <button type="button" id="btn-approve">✅ 通过</button>
+            <button type="button" id="btn-reject">❌ 驳回</button>
+            <button type="button" id="btn-need-more">✏️ 要求补充资料</button>
+            <button type="button" id="btn-close-detail">收起</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 用户列表 ============ -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">👤 用户列表</div>
+      </div>
+      <div class="window-body">
+        <button type="button" id="btn-refresh-users" class="mb8">🔄 刷新</button>
+        <div id="users-msg" class="info-box">正在读取用户列表...</div>
+        <table class="admin-table" id="users-table" style="display:none;">
+          <thead>
+            <tr>
+              <th>头像</th>
+              <th>用户名</th>
+              <th>QQ 号</th>
+              <th>注册时间</th>
+              <th>验证状态</th>
+              <th>风险等级</th>
+            </tr>
+          </thead>
+          <tbody id="users-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="status-bar">
+    <p class="status-bar-field">STATUS: ADMIN MODE</p>
+    <p class="status-bar-field">VoteZone 2000 Security Terminal</p>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin-users.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>身份验证终端 · VoteZone 2000</title>
+<link rel="stylesheet" href="https://unpkg.com/98.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/verification.css" />
+</head>
+<body>
+<div class="page-wrap terminal-theme">
+
+  <div class="site-banner">
+    <div class="site-banner__inner">
+      <h1>&gt;_ VOTEZONE SECURITY TERMINAL</h1>
+      <p><a href="index.html">← 返回首页</a></p>
+    </div>
+  </div>
+
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">🗔 VoteZone.exe - 身份验证终端</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="toolbar" id="toolbar"><span>正在加载登录状态...</span></div>
+  </div>
+
+  <div id="not-logged-in" class="info-box" style="display:none;">
+    请先<a href="login.html?redirect=verification.html">登录</a>后再访问身份验证终端。
+  </div>
+
+  <div id="verification-area" style="display:none;">
+
+    <!-- ============ 个人资料 ============ -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">👤 个人资料</div>
+      </div>
+      <div class="window-body">
+        <p>
+          当前验证状态：
+          <span class="badge" id="status-badge">-</span>
+        </p>
+        <div id="review-note-box" class="info-box" style="display:none;"></div>
+
+        <div id="profile-error" class="error-box" style="display:none;"></div>
+        <div id="profile-success" class="success-box" style="display:none;"></div>
+
+        <form id="profile-form">
+          <div class="field-row-stacked">
+            <label for="p-username">用户名</label>
+            <input id="p-username" type="text" maxlength="20" required />
+          </div>
+
+          <div class="field-row-stacked">
+            <label>头像</label>
+            <div>
+              <img id="avatar-preview" class="avatar-preview" src="" alt="头像预览" style="display:none;" />
+              <input id="p-avatar-file" type="file" accept="image/png,image/jpeg,image/gif,image/webp" />
+            </div>
+            <p class="form-hint">支持 JPG / PNG / GIF / WebP，建议不超过 2MB。</p>
+          </div>
+
+          <div class="field-row-stacked">
+            <label for="p-qq">QQ 号</label>
+            <input id="p-qq" type="text" inputmode="numeric" pattern="[0-9]{5,15}" maxlength="15" required />
+          </div>
+
+          <div class="mt12">
+            <button type="submit" id="profile-save-btn">保存资料</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============ 身份验证流程 ============ -->
+    <div class="window" id="wizard-window">
+      <div class="title-bar">
+        <div class="title-bar-text">🛡 身份验证申请</div>
+      </div>
+      <div class="window-body">
+
+        <div id="wizard-blocked-msg" class="info-box" style="display:none;"></div>
+
+        <div id="wizard-content" style="display:none;">
+          <div class="step-indicator">
+            <div class="step" id="step-ind-1">① 完善资料</div>
+            <div class="step" id="step-ind-2">② 验证任务</div>
+            <div class="step" id="step-ind-3">③ 提交申请</div>
+          </div>
+
+          <!-- Step 1 -->
+          <div id="step-1" class="sunken-panel" style="padding:8px; display:none;">
+            <p>请先在上方完善用户名、头像和 QQ 号，保存成功后即可进入下一步。</p>
+            <button type="button" id="step1-next">下一步 →</button>
+          </div>
+
+          <!-- Step 2 -->
+          <div id="step-2" class="sunken-panel" style="padding:8px; display:none;">
+            <p>请完成下面的随机验证任务（后端会核对答案，不是前端说了算）：</p>
+            <div id="challenge-error" class="error-box" style="display:none;"></div>
+            <div id="challenge-success" class="success-box" style="display:none;"></div>
+            <p id="challenge-prompt" style="font-size:16px; font-weight:bold;">正在生成任务...</p>
+
+            <div id="challenge-math-area" style="display:none;">
+              <input id="challenge-answer-input" type="number" placeholder="请输入答案" />
+              <button type="button" id="challenge-submit-btn">提交答案</button>
+            </div>
+
+            <div id="challenge-click-area" class="click-code-grid" style="display:none;"></div>
+
+            <p>
+              <button type="button" id="challenge-refresh-btn">🔄 换一个任务</button>
+              <button type="button" id="step2-next" style="display:none;">下一步 →</button>
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div id="step-3" class="sunken-panel" style="padding:8px; display:none;">
+            <div id="submit-error" class="error-box" style="display:none;"></div>
+            <div class="field-row-stacked">
+              <label for="reason-input">申请理由</label>
+              <textarea id="reason-input" rows="4" maxlength="500" placeholder="例如：我是该账号本人，希望参与正式投票。"></textarea>
+            </div>
+            <button type="button" id="submit-request-btn">提交身份验证申请</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="status-bar">
+    <p class="status-bar-field">STATUS: SECURE CHANNEL</p>
+    <p class="status-bar-field">VoteZone 2000 Security Terminal</p>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/verification.js"></script>
+</body>
+</html>
